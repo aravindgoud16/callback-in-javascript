@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <script>
+        var users = [{
+                name: "aravind",
+                email: "aaa@gmail.com",
+                mobile: 9876543210,
+                password: "000111",
+                isActive: true,
+            }, {
+                name: "aravind",
+                email: "bbb@gmail.com",
+                mobile: 9874561230,
+                password: "111000",
+                isActive: true,
+            }, {
+                name: "aravind",
+                email: "ccc@gmail.com",
+                mobile: 7894561230,
+                password: "111222",
+                isActive: false,
+            }, {
+                name: "aravind",
+                email: "dddd@gmail.com",
+                mobile: 6547891230,
+                password: "2222333",
+                isActive: false,
+            }, {
+                name: "aravind",
+                email: "fff@gmail.com",
+                mobile: 1234567890,
+                password: "2224444",
+                isActive: true,
+            }, {
+                name: "aravind",
+                email: "ggg@gmail.com",
+                mobile: 456120789,
+                password: "ggg4444",
+                isActive: false,
+            },
+
+        ]
+
+        function login() {
+
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            getUser(email, function (user) {
+
+                // console.log(user, "After gettting ")
+                document.write(user, "After gettting ")
+
+                verifyUser(user, password, function (status) {
+                    // console.log(status, "Verify Completed");
+                    document.write(status, "Verify Completed");
+                });
+
+            });
+
+
+        }
+
+        function genearateToken(user, callback) {
+
+            callback('token');
+        }
+
+        function verifyUser(user, password, callback) {
+            let msg;
+            console.log(user, password);
+
+            if (!user) { // Checking is User Exists or Not
+                msg = "User not Exists";
+            } else { // enter if user exists
+
+                if (user.password != password) { // verify is Password is Correct or not
+                    msg = "Password In Correct";
+                } else { // User Password is Correct
+
+                    if (!user.isActive) {
+                        msg = "User Suspended, contact Support Team"
+                    } else {
+                        msg = "LOgin Successful"
+                    }
+
+                }
+
+            }
+
+
+
+            setTimeout(() => {
+                callback(msg)
+            }, 1000);
+        }
+
+        function getUser(email, callback) {
+            //  console.log(email)
+            var user = users.find((user) => {
+                return user.email == email
+            });
+
+            console.log(user, "Getting user fun")
+            setTimeout(() => {
+                callback(user);
+            }, 2000);
+        }
+
+        //    function saikiran() {
+        //        for(var i=0; i<arguments;i++){
+        //            console.log(arguments[i])
+        //        }
+
+        //    }
+        // saikiran("java" ,"sai","kiran","raju");
+
+        function add(x, y) {
+            return x + y;
+        }
+
+        const total = add(8, 9);
+        console.log(total)
+    </script>
+</head>
+
+<body>
+    <div>
+        <label>email</label>
+        <input id="email" type="email">
+        <label>password</label>
+        <input id="password" type=" password">
+    </div>
+    <div>
+        <button onclick="login()">Login</button>
+    </div>
+</body>
+
+</html>
